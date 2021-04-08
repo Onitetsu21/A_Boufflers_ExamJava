@@ -23,11 +23,11 @@ public class Person {
 
     private String name;
 
-    @JsonBackReference
+    @JsonBackReference(value = "bbq-person")
     @ManyToOne
     private Bbq bbq;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "person-aliment")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Aliment> aliments;
 

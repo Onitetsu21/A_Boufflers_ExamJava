@@ -25,9 +25,13 @@ public class Bbq {
     private String City;
     private String Country;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "bbq-person")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Person> persons;
+
+    @JsonManagedReference(value = "bbq-aliment")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Aliment> aliments;
 
 
 
@@ -41,6 +45,7 @@ public class Bbq {
         this.City = City;
         this.Country = Country;
         this.persons = new ArrayList<>();
+        this.aliments = new ArrayList<>();
     }
 
 
@@ -92,6 +97,14 @@ public class Bbq {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+
+    public List<Aliment> getAliments() {
+        return this.aliments;
+    }
+
+    public void setAliments(List<Aliment> aliments) {
+        this.aliments = aliments;
     }
 
 }

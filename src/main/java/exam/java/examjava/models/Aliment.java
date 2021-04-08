@@ -17,9 +17,13 @@ public class Aliment {
 
     private String name;
 
-    @JsonBackReference
+    @JsonBackReference(value = "person-aliment")
     @ManyToOne
     private Person person;
+
+    @JsonBackReference(value = "bbq-aliment")
+    @ManyToOne
+    private Bbq bbq;
 
 
     public Aliment() {}

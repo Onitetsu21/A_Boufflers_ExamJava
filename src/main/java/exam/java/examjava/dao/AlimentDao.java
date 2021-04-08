@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import exam.java.examjava.models.Person;
 import exam.java.examjava.models.Aliment;
+import exam.java.examjava.models.Bbq;
 
 @Repository
 public interface AlimentDao extends JpaRepository<Aliment, Integer> {
@@ -15,6 +16,8 @@ public interface AlimentDao extends JpaRepository<Aliment, Integer> {
     List<Aliment> findAll();
 
     List<Aliment> findAllByPerson(Person person);
+
+    List<Aliment> findAllByBbq(Bbq bbq);
     
     Aliment findById(int id);
 
