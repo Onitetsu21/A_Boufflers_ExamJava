@@ -2,7 +2,9 @@ package exam.java.examjava.controllers;
 
 import java.util.List;
 
+import exam.java.examjava.dao.AlimentDao;
 import exam.java.examjava.dao.PersonDao;
+import exam.java.examjava.models.Aliment;
 import exam.java.examjava.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
     
     private final PersonDao personDao;
+    private final AlimentDao alimentDao;
 
     @Autowired
-    public PersonController(PersonDao personDao){
+    public PersonController(PersonDao personDao, AlimentDao alimentDao){
         this.personDao = personDao;
+        this.alimentDao = alimentDao;
     }
 
     @GetMapping
@@ -70,5 +74,26 @@ public class PersonController {
         modifiedPerson = personDao.save(person);
 
         return new ResponseEntity<>(modifiedPerson, HttpStatus.OK);
+    }
+
+    @PutMapping("/{personId}/aliments/{alimentId}")
+    public ResponseEntity<Person> addPersonInBbq(@PathVariable int personId, @PathVariable int alimentId){
+        Person person = personDao.findById(personId);
+
+        if(person == null){
+            return new ResponseEntity<>(HttpStatus.NOT_EXTENDED);
+        }
+
+        Aliment aliment = alimentDao.findById(alimentId);
+
+        if(aliment == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        person.getAliments().add(aliment);
+        aliment.setPerson(person);
+        person.setId(personId);
+        personDao.save(person);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
 }

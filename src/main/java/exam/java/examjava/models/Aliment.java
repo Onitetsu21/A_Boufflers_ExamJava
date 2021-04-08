@@ -1,21 +1,15 @@
 package exam.java.examjava.models;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Person {
+public class Aliment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +19,13 @@ public class Person {
 
     @JsonBackReference
     @ManyToOne
-    private Bbq bbq;
-
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Aliment> aliments;
-
-    public Person() {}
+    private Person person;
 
 
-    public Person(int id, String name) {
+    public Aliment() {}
+
+
+    public Aliment(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -56,20 +47,12 @@ public class Person {
         this.name = name;
     }
     
-    public Bbq getBbq() {
-        return this.bbq;
+    public Person getPerson() {
+        return this.person;
     }
 
-    public void setBbq(Bbq bbq) {
-        this.bbq = bbq;
-    }
-
-    public List<Aliment> getAliments() {
-        return this.aliments;
-    }
-
-    public void setAliments(List<Aliment> aliments) {
-        this.aliments = aliments;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
 }
