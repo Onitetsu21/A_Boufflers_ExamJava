@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Person {
+public class Person implements AlcoholDrinkers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,22 +23,24 @@ public class Person {
 
     private String name;
     private int bloodAlcohol = 0;
+    private String status = "Fine";
 
     @JsonBackReference(value = "bbq-person")
     @ManyToOne
     private Bbq bbq;
 
     @JsonManagedReference(value = "person-aliment")
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Aliment> aliments;
 
     public Person() {}
 
 
-    public Person(int id, String name, int bloodAlcohol) {
+    public Person(int id, String name, int bloodAlcohol, String status) {
         this.id = id;
         this.name = name;
         this.bloodAlcohol = bloodAlcohol;
+        this.status = status;
     }
 
 
@@ -66,9 +68,28 @@ public class Person {
         this.bloodAlcohol = bloodAlcohol;
     }
 
+    @Override
     public void drinkAlcohol(int bloodAlcohol){
         this.bloodAlcohol = bloodAlcohol +1;
+        if (this.bloodAlcohol == 3){
+            this.beDrunk();
+        }
     }
+
+    @Override
+    public void beDrunk(){
+        this.status = "Drunk";
+    }
+
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 
     public Bbq getBbq() {
         return this.bbq;
@@ -85,6 +106,7 @@ public class Person {
     public void setAliments(List<Aliment> aliments) {
         this.aliments = aliments;
     }
+
 
 }
 

@@ -15,15 +15,10 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Bbq {
+public class Bbq extends Place{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    
     private LocalDate date;
-    private String address;
-    private String City;
-    private String Country;
 
     @JsonManagedReference(value = "bbq-person")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -35,24 +30,11 @@ public class Bbq {
 
     public Bbq() {}
 
-    public Bbq(int id, LocalDate date, String address, String City, String Country) {
-        this.id = id;
+    public Bbq(int id, LocalDate date, String address, String city, String country) {
+        super(id, address, city, country);
         this.date = date;
-        this.address = address;
-        this.City = City;
-        this.Country = Country;
         this.persons = new ArrayList<>();
         this.aliments = new ArrayList<>();
-    }
-
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -62,31 +44,6 @@ public class Bbq {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return this.City;
-    }
-
-    public void setCity(String City) {
-        this.City = City;
-    }
-
-    public String getCountry() {
-        return this.Country;
-    }
-
-    public void setCountry(String Country) {
-        this.Country = Country;
-    }
-
 
     public List<Person> getPersons() {
         return this.persons;
