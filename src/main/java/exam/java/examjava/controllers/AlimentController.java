@@ -1,7 +1,6 @@
 package exam.java.examjava.controllers;
 
 import java.util.List;
-
 import exam.java.examjava.dao.AlimentDao;
 import exam.java.examjava.models.Aliment;
 import org.springframework.beans.factory.annotation.Autowired;

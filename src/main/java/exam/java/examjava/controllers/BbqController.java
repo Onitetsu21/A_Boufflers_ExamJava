@@ -104,7 +104,7 @@ public class BbqController {
         return new ResponseEntity<>(bbq, HttpStatus.OK);
     }
 
-    @PutMapping("/{bbqId}/persons/{personId}/aliments/{alimentId}")
+    @DeleteMapping("/{bbqId}/persons/{personId}/aliments/{alimentId}")
     public ResponseEntity<Bbq> consumnAliment(@PathVariable int bbqId, @PathVariable int personId, @PathVariable int alimentId){
         Bbq bbq = bbqDao.findById(bbqId);
         if(bbq == null){
@@ -126,10 +126,17 @@ public class BbqController {
             person.setId(personId);
             personDao.save(person);
         }
+
         bbq.getAliments().remove(aliment);
         bbq.setId(bbqId);
         bbqDao.save(bbq);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        person.getAliments().remove(aliment);
+        person.setId(personId);
+        personDao.save(person);
+
+        alimentDao.deleteById(alimentId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

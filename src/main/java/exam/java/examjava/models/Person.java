@@ -43,7 +43,6 @@ public class Person implements AlcoholDrinkers {
         this.status = status;
     }
 
-
     public int getId() {
         return this.id;
     }
@@ -81,7 +80,6 @@ public class Person implements AlcoholDrinkers {
         this.status = "Drunk";
     }
 
-
     public String getStatus() {
         return this.status;
     }
@@ -89,7 +87,6 @@ public class Person implements AlcoholDrinkers {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
     public Bbq getBbq() {
         return this.bbq;
