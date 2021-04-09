@@ -1,5 +1,6 @@
 package exam.java.examjava.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Aliment {
     private int id;
 
     private String name;
+    private TypeOfAliment type;
 
     @JsonBackReference(value = "person-aliment")
     @ManyToOne
@@ -29,9 +31,10 @@ public class Aliment {
     public Aliment() {}
 
 
-    public Aliment(int id, String name) {
+    public Aliment(int id, String name, TypeOfAliment type) {
         this.id = id;
         this.name = name;
+        this.type = type;
     }
 
 
@@ -50,6 +53,14 @@ public class Aliment {
     public void setName(String name) {
         this.name = name;
     }
+
+    public TypeOfAliment getType() {
+        return this.type;
+    }
+
+    public void setType(TypeOfAliment type) {
+        this.type = type;
+    }
     
     public Person getPerson() {
         return this.person;
@@ -57,6 +68,14 @@ public class Aliment {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public Bbq getBbq() {
+        return this.bbq;
+    }
+
+    public void setBbq(Bbq bbq) {
+        this.bbq = bbq;
     }
 
 }

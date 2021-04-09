@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamJava</title>
+</head>
+<body>
+    <h2>BBQ</h2>
+    
+                <h2>BBQ</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Ville</th>
+                            <th>Country</th>
+                            <!-- <th>Delete</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bbq : ${bbqs}">
+                        <td th:text="${bbq.date}"></td>
+                        <td th:text="${bbq.city}"></td>
+                        <td th:text="${bbq.country}"></td>
+                        <!-- <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td> -->
+                    </tr>
+                </tbody>
+            </table>
+          
+        <!-- <p><a href="/signup">Add a new user</a></p> -->
+    </div>
+</body>
+</html>

@@ -22,21 +22,23 @@ public class Person {
     private int id;
 
     private String name;
+    private int bloodAlcohol = 0;
 
     @JsonBackReference(value = "bbq-person")
     @ManyToOne
     private Bbq bbq;
 
     @JsonManagedReference(value = "person-aliment")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany
     private List<Aliment> aliments;
 
     public Person() {}
 
 
-    public Person(int id, String name) {
+    public Person(int id, String name, int bloodAlcohol) {
         this.id = id;
         this.name = name;
+        this.bloodAlcohol = bloodAlcohol;
     }
 
 
@@ -55,7 +57,19 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public int getBloodAlcohol() {
+        return this.bloodAlcohol;
+    }
+
+    public void setBloodAlcohol(int bloodAlcohol) {
+        this.bloodAlcohol = bloodAlcohol;
+    }
+
+    public void drinkAlcohol(int bloodAlcohol){
+        this.bloodAlcohol = bloodAlcohol +1;
+    }
+
     public Bbq getBbq() {
         return this.bbq;
     }

@@ -33,10 +33,7 @@ public class Bbq {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Aliment> aliments;
 
-
-
     public Bbq() {}
-
 
     public Bbq(int id, LocalDate date, String address, String City, String Country) {
         this.id = id;
@@ -106,5 +103,4 @@ public class Bbq {
     public void setAliments(List<Aliment> aliments) {
         this.aliments = aliments;
     }
-
 }
